@@ -72,6 +72,13 @@ def get_all():
     return cab.get_all()
 
 
+@jsonrpc.method('App.get_tags')
+def get_tags():
+    global vault_config
+    cab = vault_config.get('cabinet')
+    return cab.get_tags()
+
+
 @jsonrpc.method('App.get(name=str)')
 def get(name):
     global vault_config
