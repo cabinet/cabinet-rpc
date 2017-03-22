@@ -15,12 +15,14 @@ app = Flask(__name__)
 
 jsonrpc = JSONRPC(app, '/api/v1')
 
-config_path = os.path.join(os.getcwd(), 'test.data', 'secrets')
-vault_path = os.path.join(os.getcwd(), 'test.data', 'vaults')
+base_path = os.path.join(os.path.expanduser('~'), '.config', 'cabinet')
+secrets_path = os.path.join(base_path, 'secrets')
+vault_path = os.path.join(base_path, 'vaults')
+
 
 # GLOBAL config object
 vault_config = {
-    'config_path': config_path,
+    'secrets_path': secrets_path,
     'vault_path': vault_path,
     'vault_name': None,
     'account_id': None,
@@ -49,11 +51,11 @@ def open_vault(username, password, vault_name, vault_path=None):
     # TODO: Implement username/password/vault validation and opening
 
     global vault_config
-    config_path = vault_config.get('config_path')
+    secrets_path = vault_config.get('secrets_path')
     if vault_path is None:
         vault_path = vault_config.get('vault_path')
 
-    cab = Cabinet(username, password, config_path)
+    cab = Cabinet(username, password, secrets_path)
     cab.open(vault_name, vault_path)
     vault_config['cabinet'] = cab
 
