@@ -138,8 +138,8 @@ def run_rpc_server(port, no_token):
     print(app_port, file=sys.stdout, flush=True)
 
     # Redirect stdout and stderror to log files
-    sys.stdout = open('rpc-server.out', 'w')
-    sys.stderr = open('rpc-server.err', 'w')
+    # sys.stdout = open('rpc-server.out', 'w')
+    # sys.stderr = open('rpc-server.err', 'w')
 
     app.secret_key = token_urlsafe(32)
 
