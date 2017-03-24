@@ -102,6 +102,10 @@ class RPCClient:
         response = self._rpc_call("App.get_all")
         return response
 
+    def get_tags(self):
+        response = self._rpc_call("App.get_tags")
+        return response
+
     def get(self, name):
         response = self._rpc_call("App.get", name=name)
         return response
@@ -134,6 +138,9 @@ def main():
     # Note: use `test-app.py` to add some random data
     items = client.get_all()
     show_response("Get all the items", items)
+
+    tags = client.get_tags()
+    show_response("Get all the tags", tags)
 
     r = client.get(name='test-item #42')
     show_response("Get one item", r)
